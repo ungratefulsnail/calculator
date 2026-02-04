@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
+
+* {
+    font-family: 'Share Tech', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: grey;
+    padding: 30px;
+    width: 350px;
+    border-radius: 20px;
+}
+
+.display {
+    width: 100%;
+    font-size: 3rem;
+    text-align: end;
+    color: lightgrey;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.btn {
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    height: 65px;
+    width: 65px;
+    transition: 0.2s;
+    margin: 2px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.btn.delete svg {
+  width: 22px;
+  height: 22px;
+  pointer-events:
+}
