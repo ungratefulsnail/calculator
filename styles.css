@@ -12,46 +12,69 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgb(230, 230, 230);
 }
 
 .container {
-    background: grey;
     padding: 30px;
-    width: 350px;
-    border-radius: 20px;
+    width: 320px;
+    border-radius: 50px;
+    background: #e0e0e0;
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
 }
 
 .display {
     width: 100%;
+    padding-right: 10px;
     font-size: 3rem;
     text-align: end;
-    color: lightgrey;
+    color: black;
     word-wrap: break-word;
     word-break: break-all;
+    border-radius: 28px;
+    background: #e0e0e0;
+    box-shadow:  -6px -6px 12px #bcbcbc, 6px 6px 12px #ffffff;
+}
+
+.keys {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  gap: 15px;
 }
 
 .btn {
-    font-size: 1.5rem;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    height: 65px;
-    width: 65px;
-    transition: 0.2s;
-    margin: 2px;
+  flex: 1;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  box-shadow: inset 4px 4px 10px #bcbcbc, inset -4px -4px 10px #ffffff;
+  border: 2px solid rgb(206, 206, 206);
+  font-size: 25px;
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
 }
 
+
 button:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
+    transform: scale(1.15);
+    filter: brightness(1.03);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(0.9);
 }
 
 .btn.delete svg {
-  width: 22px;
-  height: 22px;
-  pointer-events:
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
 }
