@@ -1,11 +1,17 @@
+/* ===========
+  Selectors
+=========== */
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
-const modifiers = document.querySelectorAll('.modifiers');
+const modifiers = document.querySelectorAll('.modifier');
 const clearBtn = document.querySelector('.clear');
 const deleteBtn = document.querySelector('.delete');
 const equalsBtn = document.querySelector('.equals');
 const input = document.querySelector('#input');
 
+/* ==============
+  Math Functions
+============== */
 const add = function(a, b) {
     return a + b;
 };
@@ -19,4 +25,25 @@ const divide = function(a, b) {
     return a / b;
 };
 
-alert(divide(30, 5));
+/* ==================
+  Operation dispatch
+================== */
+const operate = function(a, b, operator) {
+    switch (operator) {
+        case '+':
+            return add(a, b);
+        case '-':
+            return subtract(a, b);
+        case '*':
+            return multiply(a, b);
+        case '/':
+            return divide(a, b);
+    };
+} ;
+
+/* ===============
+  State Variables
+=============== */
+let previousValue;
+let currentValue;
+let currentOperator;
