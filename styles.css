@@ -28,7 +28,7 @@ body {
     padding-right: 10px;
     font-size: 3rem;
     text-align: end;
-    color: black;
+    color: rgb(95, 95, 95);
     word-wrap: break-word;
     word-break: break-all;
     border-radius: 28px;
@@ -39,18 +39,19 @@ body {
 .keys {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 4px;
   margin-top: 20px;
+  
 }
 
 .row {
   display: flex;
-  gap: 15px;
+  gap: 4px;
 }
 
 .btn {
   flex: 1;
-  height: 55px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,20 +62,38 @@ body {
   font-size: 25px;
   cursor: pointer;
   transition: transform 0.15s ease-in-out;
+  color: rgb(95, 95, 95);
+  user-select: none;
 }
 
 
 button:hover {
-    transform: scale(1.15);
+    
     filter: brightness(1.03);
 }
 
 button:active {
-    transform: scale(0.9);
+    transform: scale(0.8);
 }
 
 .btn.delete svg {
   width: 20px;
   height: 20px;
   pointer-events: none;
+}
+
+.btn.clear {
+    color: rgb(209, 129, 126);
+}
+
+.btn.operator {
+    color: rgb(165, 126, 209);
+}
+
+.btn.modifier {
+    color: rgb(138, 160, 207);
+}
+
+.btn.equals {
+    color: rgb(207, 171, 104);
 }
