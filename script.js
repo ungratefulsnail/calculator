@@ -9,6 +9,15 @@ const deleteBtn = document.querySelector('.delete');
 const equalsBtn = document.querySelector('.equals');
 const input = document.querySelector('#input');
 
+/* ================
+  Event Listeners
+================ */
+numbers.forEach((number) => {
+    number.addEventListener('pointerdown', () => {
+        input.textContent = number.textContent;
+    });
+});
+
 /* ==============
   Math Functions
 ============== */
@@ -47,3 +56,4 @@ const operate = function(a, b, operator) {
 let previousValue;
 let currentValue;
 let currentOperator;
+
