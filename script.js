@@ -13,6 +13,11 @@ const input = document.querySelector('#input');
 /* ================
   Event Listeners
 ================ */
+/*
+Single event listeners using event delegation - listen on the parent (.keys)
+and determine which button was pressed based on its class.
+Did this to avoid attaching listeners to each button and keeps it clean.
+*/
 keys.addEventListener('pointerdown', (e) => {
     if(e.target.classList.contains('number')) {
         handleNumbers(e.target.textContent);
@@ -28,8 +33,12 @@ keys.addEventListener('pointerdown', (e) => {
 /* ================
   Event Handlers
 ================ */
-function handleNumbers(key) {
-    currentValue += key;
+/*
+Each one is responsible for a single action and it's triggered by a specific
+button - they update the calculator state and display.
+*/
+function handleNumbers(digit) {
+    currentValue += digit;
     input.textContent = currentValue;
 };
 
@@ -40,9 +49,12 @@ function handleClear() {
 
 function handleDelete() {
     currentValue = currentValue.slice(0, -1);
-    if(currentValue === '') currentValue = '0';
     input.textContent = currentValue;
-    
+    if (currentValue === '') {
+        input.textContent = '0';
+    } else {
+        currentValue;
+    }
 };
 
 /* ==============
@@ -64,6 +76,10 @@ const divide = function(a, b) {
 /* ==================
   Operation dispatch
 ================== */
+/*
+Determines which operation to perform based on the selected operator.
+Acts for all calculations and keeps the math logic separate from events and UI.
+*/
 const operate = function(a, b, operator) {
     switch (operator) {
         case '+':
@@ -80,6 +96,12 @@ const operate = function(a, b, operator) {
 /* ===============
   State Variables
 =============== */
+/*
+Represents the current state of the calculator.
+previousValue: stored value before an operation
+currentValue: number currently being entered
+currentOperator: selected math operator
+ */
 let previousValue = '';
 let currentValue = '';
 let currentOperator = '';
