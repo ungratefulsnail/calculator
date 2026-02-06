@@ -1,6 +1,7 @@
 /* ===========
   Selectors
 =========== */
+const keys = document.querySelector('.keys');
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const modifiers = document.querySelectorAll('.modifier');
@@ -12,11 +13,21 @@ const input = document.querySelector('#input');
 /* ================
   Event Listeners
 ================ */
-numbers.forEach((number) => {
-    number.addEventListener('pointerdown', () => {
-        input.textContent = number.textContent;
-    });
-});
+// numbers.forEach((number) => {
+//     number.addEventListener('pointerdown', () => {
+//         input.textContent = number.textContent;
+//     });
+// });
+
+keys.addEventListener('pointerdown', (e) => {
+    if(e.target.classList.contains('number')) {
+        currentValue += e.target.textContent;
+        input.textContent = currentValue;
+    } else if(e.target.classList.contains('clear')) {
+        currentValue = '';
+        input.textContent = '0';
+    }
+})
 
 /* ==============
   Math Functions
@@ -54,6 +65,6 @@ const operate = function(a, b, operator) {
   State Variables
 =============== */
 let previousValue;
-let currentValue;
+let currentValue = '';
 let currentOperator;
 
