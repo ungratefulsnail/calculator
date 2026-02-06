@@ -13,21 +13,37 @@ const input = document.querySelector('#input');
 /* ================
   Event Listeners
 ================ */
-// numbers.forEach((number) => {
-//     number.addEventListener('pointerdown', () => {
-//         input.textContent = number.textContent;
-//     });
-// });
-
 keys.addEventListener('pointerdown', (e) => {
     if(e.target.classList.contains('number')) {
-        currentValue += e.target.textContent;
-        input.textContent = currentValue;
+        handleNumbers(e.target.textContent);
+
     } else if(e.target.classList.contains('clear')) {
-        currentValue = '';
-        input.textContent = '0';
+        handleClear();
+
+    } else if(e.target.classList.contains('delete')) {
+        handleDelete();
     }
-})
+});
+
+/* ================
+  Event Handlers
+================ */
+function handleNumbers(key) {
+    currentValue += key;
+    input.textContent = currentValue;
+};
+
+function handleClear() {
+    currentValue = '';
+    input.textContent = '0';
+};
+
+function handleDelete() {
+    currentValue = currentValue.slice(0, -1);
+    if(currentValue === '') currentValue = '0';
+    input.textContent = currentValue;
+    
+};
 
 /* ==============
   Math Functions
@@ -64,7 +80,7 @@ const operate = function(a, b, operator) {
 /* ===============
   State Variables
 =============== */
-let previousValue;
+let previousValue = '';
 let currentValue = '';
-let currentOperator;
+let currentOperator = '';
 
