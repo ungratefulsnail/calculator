@@ -27,6 +27,9 @@ keys.addEventListener('pointerdown', (e) => {
 
     } else if(e.target.classList.contains('delete')) {
         handleDelete();
+
+    } else if(e.target.classList.contains('operator')) {
+        handleOperators(e.target.textContent);
     }
 });
 
@@ -38,6 +41,7 @@ Each one is responsible for a single action and it's triggered by a specific
 button - they update the calculator state and display.
 */
 function handleNumbers(digit) {
+    if(currentValue === '0') currentValue = ''; // removes leading 0
     currentValue += digit;
     input.textContent = currentValue;
 };
@@ -50,12 +54,17 @@ function handleClear() {
 function handleDelete() {
     currentValue = currentValue.slice(0, -1);
     input.textContent = currentValue;
-    if (currentValue === '') {
+    if (currentValue === '') { // if all digits are removed, keep display at 0
         input.textContent = '0';
     } else {
         currentValue;
     }
 };
+
+function handleOperators(operator) {
+    currentOperator = operator;
+    input.textContent = currentOperator;
+} 
 
 /* ==============
   Math Functions
@@ -91,7 +100,7 @@ const operate = function(a, b, operator) {
         case '/':
             return divide(a, b);
     };
-} ;
+};
 
 /* ===============
   State Variables
