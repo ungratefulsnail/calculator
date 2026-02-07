@@ -47,23 +47,24 @@ function handleNumbers(digit) {
 };
 
 function handleClear() {
-    currentValue = '';
+    previousValue = '';
+    currentValue = ''; // reset the current input
     input.textContent = '0';
 };
 
 function handleDelete() {
-    currentValue = currentValue.slice(0, -1);
+    currentValue = currentValue.slice(0, -1); // remove the last digit, backspace
     input.textContent = currentValue;
-    if (currentValue === '') { // if all digits are removed, keep display at 0
+    if (currentValue === '') { // if all digits are deleted, show 0
         input.textContent = '0';
-    } else {
-        currentValue;
     }
 };
 
 function handleOperators(operator) {
+    previousValue = currentValue; // stores the first operand
     currentOperator = operator;
     input.textContent = currentOperator;
+    currentValue = ''; // removes the previousValue from the new currentValue
 } 
 
 /* ==============
