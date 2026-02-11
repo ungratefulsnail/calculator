@@ -30,6 +30,9 @@ keys.addEventListener('pointerdown', (e) => {
 
     } else if(e.target.classList.contains('operator')) {
         handleOperators(e.target.textContent);
+
+    } else if(e.target.classList.contains('equals')) {
+        handleEquals();
     }
 });
 
@@ -65,7 +68,14 @@ function handleOperators(operator) {
     currentOperator = operator;
     input.textContent = currentOperator;
     currentValue = ''; // removes the previousValue from the new currentValue
-} 
+};
+
+function handleEquals() {
+    previousValue = Number(previousValue);
+    currentValue = Number(currentValue);
+    let result = operate(previousValue, currentValue, currentOperator);
+    input.textContent = result;
+};
 
 /* ==============
   Math Functions
