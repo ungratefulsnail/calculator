@@ -64,10 +64,23 @@ function handleDelete() {
 };
 
 function handleOperators(operator) {
-    previousValue = currentValue; // stores the first operand
-    currentOperator = operator;
-    input.textContent = currentOperator;
-    currentValue = ''; // removes the previousValue from the new currentValue
+    // Chaining case
+    if(previousValue != '' && currentValue != '') { // if we have values on both of them
+        // call operate and convert to numbers
+        let result = operate(Number(previousValue), Number(currentValue), currentOperator);
+        // store as the new previousValue & convert back to string to avoid future bugs
+        previousValue = String(result); 
+        currentOperator = operator;
+        input.textContent = result;
+        currentValue = '';
+        
+    // First operator case
+    } else {
+        previousValue = currentValue; // stores the first operand
+        currentOperator = operator;
+        input.textContent = currentOperator;
+        currentValue = ''; // removes the previousValue from the new currentValue
+    }
 };
 
 function handleEquals() {
