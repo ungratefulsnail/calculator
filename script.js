@@ -50,8 +50,10 @@ function handleNumbers(digit) {
 };
 
 function handleClear() {
+    // reset the current input
     previousValue = '';
-    currentValue = ''; // reset the current input
+    currentValue = ''; 
+    currentOperator = '';
     input.textContent = '0';
 };
 
@@ -73,21 +75,24 @@ function handleOperators(operator) {
         currentOperator = operator;
         input.textContent = result;
         currentValue = '';
-        
     // First operator case
     } else {
         previousValue = currentValue; // stores the first operand
         currentOperator = operator;
-        input.textContent = currentOperator;
+        input.textContent = previousValue;
         currentValue = ''; // removes the previousValue from the new currentValue
     }
 };
 
 function handleEquals() {
+    // finish the current operation and display result
     previousValue = Number(previousValue);
     currentValue = Number(currentValue);
     let result = operate(previousValue, currentValue, currentOperator);
+    currentValue = String(result);
     input.textContent = result;
+    previousValue = '';
+    currentOperator = '';
 };
 
 /* ==============
