@@ -47,6 +47,7 @@ function handleNumbers(digit) {
     if(currentValue === '0') currentValue = ''; // removes leading 0
     currentValue += digit;
     input.textContent = currentValue;
+    autoScale();
 };
 
 function handleClear() {
@@ -55,6 +56,7 @@ function handleClear() {
     currentValue = ''; 
     currentOperator = '';
     input.textContent = '0';
+    autoScale();
 };
 
 function handleDelete() {
@@ -63,6 +65,7 @@ function handleDelete() {
     if (currentValue === '') { // if all digits are deleted, show 0
         input.textContent = '0';
     }
+    autoScale();
 };
 
 function handleOperators(operator) {
@@ -74,6 +77,7 @@ function handleOperators(operator) {
         previousValue = String(result); 
         currentOperator = operator;
         input.textContent = result;
+        autoScale();
         currentValue = '';
     // First operator case
     } else {
@@ -85,12 +89,24 @@ function handleOperators(operator) {
 };
 
 function handleEquals() {
-    if(previousValue === '' || currentValue === '') return; // no action if there is no value
+    // avoid Infinity when operate with /
+    if(currentOperator === '/' && Number(currentValue) === 0) {
+        input.textContent = 'ERROR';
+        previousValue = '';
+        currentValue = ''; 
+        currentOperator = '';
+        return;
+    };
+
+    // no action if there is no value
+    if(previousValue === '' || currentValue === '') return; 
+    
     previousValue = Number(previousValue);
     currentValue = Number(currentValue);
     let result = operate(previousValue, currentValue, currentOperator);
     currentValue = String(result);
     input.textContent = result;
+    autoScale();
     previousValue = '';
     currentOperator = '';
 };
@@ -130,6 +146,21 @@ const operate = function(a, b, operator) {
             return divide(a, b);
     };
 };
+
+/* ==================
+  Auto-scale display
+================== */
+function autoScale() {
+    const display = input.parentElement;
+    let fontSize = 48;
+    input.style.fontSize = fontSize + 'px';
+
+    while (input.scrollWidth > display.clientWidth && fontSize > 12) {
+        fontSize--;
+        input.style.fontSize = fontSize + 'px';
+    }
+}
+
 
 /* ===============
   State Variables
