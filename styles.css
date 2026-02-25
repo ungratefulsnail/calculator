@@ -16,6 +16,7 @@ body {
 }
 
 .container {
+    display: block;
     padding: 30px;
     width: 320px;
     border-radius: 50px;
@@ -25,16 +26,20 @@ body {
 
 .display {
     width: 100%;
-    padding-right: 10px;
-    font-size: 3rem;
-    text-align: end;
+    height: 55px;
+    padding: 0 12px;
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
     color: rgb(95, 95, 95);
-    word-wrap: break-word;
-    word-break: break-all;
+    white-space: nowrap;
     border-radius: 28px;
     background: #e0e0e0;
     box-shadow:  -6px -6px 12px #bcbcbc, 6px 6px 12px #ffffff;
 }
+
 
 .keys {
   display: flex;
