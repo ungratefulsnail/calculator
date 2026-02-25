@@ -85,7 +85,7 @@ function handleOperators(operator) {
 };
 
 function handleEquals() {
-    // finish the current operation and display result
+    if(previousValue === '' || currentValue === '') return; // no action if there is no value
     previousValue = Number(previousValue);
     currentValue = Number(currentValue);
     let result = operate(previousValue, currentValue, currentOperator);
