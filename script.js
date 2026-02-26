@@ -69,6 +69,9 @@ function handleDelete() {
 };
 
 function handleOperators(operator) {
+    if(previousValue != '' && currentValue === '') {
+        return;
+    }
     // Chaining case
     if(previousValue != '' && currentValue != '') { // if we have values on both of them
         // call operate and convert to numbers
