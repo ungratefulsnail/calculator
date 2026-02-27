@@ -19,20 +19,23 @@ and determine which button was pressed based on its class.
 Did this to avoid attaching listeners to each button and keeps it clean.
 */
 keys.addEventListener('pointerdown', (e) => {
-    if(e.target.classList.contains('number')) {
+    if (e.target.classList.contains('number')) {
         handleNumbers(e.target.textContent);
 
-    } else if(e.target.classList.contains('clear')) {
+    } else if (e.target.classList.contains('clear')) {
         handleClear();
 
-    } else if(e.target.classList.contains('delete')) {
+    } else if (e.target.classList.contains('delete')) {
         handleDelete();
 
-    } else if(e.target.classList.contains('operator')) {
+    } else if (e.target.classList.contains('operator')) {
         handleOperators(e.target.textContent);
 
-    } else if(e.target.classList.contains('equals')) {
+    } else if (e.target.classList.contains('equals')) {
         handleEquals();
+
+    } else if (e.target.classList.contains('modifier')) {
+        handleModifier(e.target.textContent);
     }
 });
 
@@ -44,7 +47,7 @@ Each one is responsible for a single action and it's triggered by a specific
 button - they update the calculator state and display.
 */
 function handleNumbers(digit) {
-    if(currentValue === '0') currentValue = ''; // removes leading 0
+    if (currentValue === '0') currentValue = ''; // removes leading 0
     currentValue += digit;
     input.textContent = currentValue;
     autoScale();
@@ -69,11 +72,12 @@ function handleDelete() {
 };
 
 function handleOperators(operator) {
-    if(previousValue != '' && currentValue === '') {
+    // Solves operator after operator bug
+    if (previousValue != '' && currentValue === '') {
         return;
     }
     // Chaining case
-    if(previousValue != '' && currentValue != '') { // if we have values on both of them
+    if (previousValue != '' && currentValue != '') { // if we have values on both of them
         // call operate and convert to numbers
         let result = operate(Number(previousValue), Number(currentValue), currentOperator);
         // store as the new previousValue & convert back to string to avoid future bugs
@@ -93,7 +97,7 @@ function handleOperators(operator) {
 
 function handleEquals() {
     // avoid Infinity when operate with /
-    if(currentOperator === '/' && Number(currentValue) === 0) {
+    if (currentOperator === '/' && Number(currentValue) === 0) {
         input.textContent = 'ERROR';
         previousValue = '';
         currentValue = ''; 
@@ -102,7 +106,7 @@ function handleEquals() {
     };
 
     // no action if there is no value
-    if(previousValue === '' || currentValue === '') return; 
+    if (previousValue === '' || currentValue === '') return; 
     
     previousValue = Number(previousValue);
     currentValue = Number(currentValue);
@@ -112,6 +116,35 @@ function handleEquals() {
     autoScale();
     previousValue = '';
     currentOperator = '';
+};
+
+function handleModifier(modifier) {
+    if (modifier === '.') {
+        if (currentValue.includes('.')) {
+            return;
+        } else if (currentValue === '') {
+            currentValue = '0.';
+        } else {
+            currentValue += '.';
+        }
+    }
+
+    if (modifier === '+/-') {
+        if (currentValue === '0') {
+            return;
+        }
+        
+        if (currentValue === '') {
+            return;
+        } else if (currentValue.startsWith('-')) {
+            currentValue = currentValue.slice(1);
+        } else {
+            currentValue = '-' + currentValue;
+        }
+    }
+
+    input.textContent = currentValue;
+    autoScale();
 };
 
 /* ==============
@@ -149,6 +182,7 @@ const operate = function(a, b, operator) {
             return divide(a, b);
     };
 };
+
 
 /* ==================
   Auto-scale display
