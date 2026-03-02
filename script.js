@@ -21,21 +21,46 @@ Did this to avoid attaching listeners to each button and keeps it clean.
 keys.addEventListener('pointerdown', (e) => {
     if (e.target.classList.contains('number')) {
         handleNumbers(e.target.textContent);
-
-    } else if (e.target.classList.contains('clear')) {
+    }
+    if (e.target.classList.contains('clear')) {
         handleClear();
-
-    } else if (e.target.classList.contains('delete')) {
+    }
+    if (e.target.classList.contains('delete')) {
         handleDelete();
-
-    } else if (e.target.classList.contains('operator')) {
+    }
+    if (e.target.classList.contains('operator')) {
         handleOperators(e.target.textContent);
-
-    } else if (e.target.classList.contains('equals')) {
+    }
+    if (e.target.classList.contains('equals')) {
         handleEquals();
-
-    } else if (e.target.classList.contains('modifier')) {
+    }
+    if (e.target.classList.contains('modifier')) {
         handleModifier(e.target.textContent);
+    }
+});
+
+/* =========================
+  Keyboard Event Listeners
+========================= */
+
+document.addEventListener('keydown', (e) => {
+    if (e.key >= '0' && e.key <= '9') {
+        handleNumbers(e.key);
+    }
+    if (e.key === 'Backspace') {
+        handleDelete();
+    }
+    if (e.key === 'Escape') {
+        handleClear();
+    }
+    if (['+', '-', '*', '/'].includes(e.key)) {
+        handleOperators(e.key);
+    }
+    if (e.key === 'Enter') {
+        handleEquals();
+    }
+    if (e.key === '.') {
+        handleModifier('.');
     }
 });
 
@@ -120,7 +145,7 @@ function handleEquals() {
 
 function handleModifier(modifier) {
     if (modifier === '.') {
-        if (currentValue.includes('.')) {
+        if (currentValue.includes('.')) { // prevent multiple decimal points in the same no
             return;
         } else if (currentValue === '') {
             currentValue = '0.';
@@ -130,10 +155,10 @@ function handleModifier(modifier) {
     }
 
     if (modifier === '+/-') {
-        if (currentValue === '0') {
+        if (currentValue === '0') { // prevent -0
             return;
         }
-        
+
         if (currentValue === '') {
             return;
         } else if (currentValue.startsWith('-')) {
